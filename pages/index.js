@@ -11,7 +11,16 @@ export default function Home() {
       {/* School Selector */}
       <section style={{ marginBottom: '2.5rem' }}>
         <label htmlFor="school-select" style={{ fontWeight: 'bold' }}>Select your school:</label><br />
-        <select id="school-select" style={{ marginTop: '0.5rem', padding: '0.5rem', width: '100%', maxWidth: '300px' }}>
+        <select
+          id="school-select"
+          onChange={(e) => {
+            const school = e.target.value;
+            if (school) {
+              window.location.href = `/${school}`;
+            }
+          }}
+          style={{ marginTop: '0.5rem', padding: '0.5rem', width: '100%', maxWidth: '300px' }}
+        >
           <option value="">-- Choose a school --</option>
           <option value="colby">Colby College</option>
           <option value="bowdoin">Bowdoin College</option>
