@@ -13,14 +13,17 @@ export default function HomePage() {
           <a href="/" className="text-2xl font-bold" style={{ color: '#3A86FF' }}>
             InsideCampus
           </a>
-          <a
-            href="#school-selector"
-            className="px-4 py-2 rounded-md text-white font-medium"
-            style={{ backgroundColor: '#3A86FF' }}
-          >
-            Go to School Hub
-          </a>
-        </div>
+                <select onChange={handleSchoolChange} defaultValue="" className="px-4 py-2 rounded-md bg-white border border-gray-300 text-gray-700">
+              <option value="" disabled>Explore Schools</option>
+              <option value="colby">Colby</option>
+              <option value="bowdoin">Bowdoin</option>
+              <option value="umass">UMass</option>
+              <option value="middlebury">Middlebury</option>
+              <option value="stanford">Stanford</option>
+              <option value="yale">Yale</option>
+              <option value="nyu">NYU</option>
+              <option value="uncchapelhill">UNC</option>
+            </select>    </div>
       </header>
 
       <main className="flex-grow">
