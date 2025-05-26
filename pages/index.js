@@ -53,6 +53,12 @@ export default function HomePage() {
             <option value="colby">Colby</option>
             <option value="bowdoin">Bowdoin</option>
             <option value="umass">UMass</option>
+                          <option value="middlebury">Middlebury</option>
+            <option value="stanford">Stanford</option>
+            <option value="yale">Yale</option>
+            <option value="nyu">NYU</option>
+            <option value="unc">UNC Chapel Hill</option>
+      >
           </select>
         </section>
 
