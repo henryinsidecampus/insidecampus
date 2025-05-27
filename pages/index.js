@@ -1,5 +1,6 @@
 import React from 'react';
-import Link from 'next/link';
+import Link from 'next
+  import Head from 'next/head';/link';
 
 export default function HomePage() {
   const handleSchoolChange = (e) => {
@@ -19,7 +20,12 @@ export default function HomePage() {
         flexDirection: 'column',
       }}
     >
-      {/* Sticky Header */}
+  
+      <Head>
+        <title>InsideCampus – Home</title>
+        <meta name="description" content="Student-powered Q&A hub for real campus insights." />
+      </Head>
+{/* Sticky Header */}
       <header
         style={{
           position: 'sticky',
