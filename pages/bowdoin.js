@@ -55,8 +55,8 @@ export default function BowdoinPage() {
   return (
     <div style={{ padding: '2rem', fontFamily: 'Inter, sans-serif' }}>
 <Head>
-    <title>Bowdoin Q&A Hub | InsideCampus</title>
-    <meta name="description" content="Real, anonymous questions answered by verified Bowdoin students. Join the InsideCampus Q&A hub for genuine insight." />
+    <titInsideCampus | Ask Students at Bowdoin College
+    <meta name="description" content="Real,<meta name="description" content="Get unfiltered answers from verified Bowdoin students. Submit your questions about campus life, academics, and more — anonymously." />
   </Head>
       <h1 style={{ fontSize: '2rem', fontWeight: 'bold' }}>Bowdoin Q&A Hub</h1>
       <p style={{ marginBottom: '1.5rem' }}>
