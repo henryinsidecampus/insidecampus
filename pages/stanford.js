@@ -6,13 +6,39 @@ export default function StanfordPage() {
 
   useEffect(() => {
     async function fetchQuestions() {
+          async function fetchQuestions() {
       const { data, error } = await supabase
         .from('questions')
         .select('*')
         .eq('school', 'stanford')
-        .order('created_at', { ascending: false })
 
-      if (!error) setQuestions(data)
+      if (!error && data.length === 0) {
+        await supabase.from('questions').insert([
+          {
+            school: 'stanford',
+            question_text: 'What’s Greek life like at Stanford?',
+            answer_text: 'It exists, but most people aren’t involved.',
+            class_year: '2025',
+            upvotes: 11
+          },
+          {
+            school: 'stanford',
+            question_text: 'How’s the weather year-round?',
+            answer_text: 'Sunny almost every day.',
+            class_year: '2026',
+            upvotes: 9
+          }
+        ])
+        const { data: newData } = await supabase
+          .from('questions')
+          .select('*')
+          .eq('school', 'stanford')
+          .order('created_at', { ascending: false })
+
+        setQuestions(newData)
+      } else if (!error) {
+        setQuestions(data.sort((a, b) => new Date(b.created_at) - new Date(a.created_at)))
+      }
     }
     fetchQuestions()
   }, [])
