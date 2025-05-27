@@ -1,168 +1,156 @@
+import React from 'react';
+import Link from 'next/link';
+
 export default function HomePage() {
   const handleSchoolChange = (e) => {
-    const value = e.target.value;
-    if (value) {
-      window.location.href = `/${value.toLowerCase()}`;
+    const school = e.target.value;
+    if (school) {
+      window.location.href = `/${school}`;
     }
   };
 
   return (
-    <div className="bg-[#F9FAFB] min-h-screen flex flex-col font-sans">
-      <header className="sticky top-0 z-50 bg-[#F9FAFB] shadow-sm">
-        <div className="max-w-7xl mx-auto flex items-center justify-between py-4 px-6">
-          <a href="/" className="text-2xl font-bold" style={{ color: '#3A86FF' }}>
-            InsideCampus
-          </a>
-                <select onChange={handleSchoolChange} defaultValue="" className="px-4 py-2 rounded-md bg-white border border-gray-300 text-gray-700">
-              <option value="" disabled>Explore Schools</option>
-              <option value="colby">Colby</option>
-              <option value="bowdoin">Bowdoin</option>
-              <option value="umass">UMass</option>
-              <option value="middlebury">Middlebury</option>
-              <option value="stanford">Stanford</option>
-              <option value="yale">Yale</option>
-              <option value="nyu">NYU</option>
-              <option value="UNC Chapel Hill">UNC</option>
-            </select>    </div>
-      </header>
-
-      <main className="flex-grow">
-        <section className="text-center px-6 pt-16 pb-24">
-          <h1 className="text-4xl md:text-6xl font-extrabold mb-6 text-gray-900">
-            Real answers from real students — before you even step on campus.
-          </h1>
-          <p className="text-lg md:text-xl mb-8 text-gray-700">
-            InsideCampus connects admitted and prospective students to current college insiders.
-          </p>
+    <div
+      style={{
+        fontFamily: 'Inter, sans-serif',
+        backgroundColor: '#F9FAFB',
+        minHeight: '100vh',
+        display: 'flex',
+        flexDirection: 'column',
+      }}
+    >
+      {/* Sticky Header */}
+      <header
+        style={{
+          position: 'sticky',
+          top: 0,
+          backgroundColor: '#F9FAFB',
+          zIndex: 1000,
+          padding: '1rem 1.5rem',
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          boxShadow: '0 1px 2px rgba(0,0,0,0.05)',
+        }}
+      >
+        <h1 style={{ color: '#3A86FF', fontSize: '1.25rem', fontWeight: 700 }}>InsideCampus</h1>
+        <Link href="#school-selector" passHref>
           <a
-            href="#school-selector"
-            className="inline-block px-6 py-3 rounded-md font-medium text-white"
-            style={{ backgroundColor: '#3A86FF' }}
+            style={{
+              backgroundColor: '#FF8C66',
+              color: '#fff',
+              padding: '0.5rem 1rem',
+              borderRadius: '8px',
+              fontWeight: 600,
+              textDecoration: 'none',
+            }}
           >
             Explore Schools
           </a>
-        </section>
+        </Link>
+      </header>
 
-        <section id="school-selector" className="max-w-4xl mx-auto px-6 py-12">
-          <label htmlFor="school" className="block text-lg font-medium mb-2 text-gray-800">
-            Choose your school
-          </label>
-          <select
-            id="school"
-            onChange={handleSchoolChange}
-            className="w-full md:w-1/2 p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#3A86FF]"
+      {/* Hero */}
+      <section style={{ padding: '3rem 1.5rem', textAlign: 'center' }}>
+        <h2 style={{ fontSize: '2.25rem', fontWeight: 800, color: '#111' }}>
+          Real questions. Honest answers. No BS.
+        </h2>
+        <p style={{ marginTop: '1rem', fontSize: '1.125rem', color: '#444' }}>
+          InsideCampus is the student-powered Q&A hub where you get the unfiltered scoop before you step on campus.
+        </p>
+        <Link href="#school-selector" passHref>
+          <a
+            style={{
+              marginTop: '2rem',
+              display: 'inline-block',
+              backgroundColor: '#3A86FF',
+              color: '#fff',
+              padding: '0.75rem 1.5rem',
+              borderRadius: '8px',
+              fontWeight: 600,
+              textDecoration: 'none',
+            }}
           >
-            <option value="">Select a school...</option>
-            <option value="colby">Colby</option>
-            <option value="bowdoin">Bowdoin</option>
-            <option value="umass">UMass</option>
-                          <option value="middlebury">Middlebury</option>
-            <option value="stanford">Stanford</option>
-            <option value="yale">Yale</option>
-            <option value="nyu">NYU</option>
-            <option value="unc">UNC Chapel Hill</option>
+            Start Exploring
+          </a>
+        </Link>
+      </section>
+
+      {/* School Selector */}
+      <section
+        id="school-selector"
+        style={{
+          padding: '2rem 1.5rem',
+          maxWidth: '480px',
+          margin: '0 auto',
+          width: '100%',
+        }}
       >
-          </select>
-        </section>
+        <label htmlFor="school" style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 600 }}>
+          Choose your school:
+        </label>
+        <select
+          id="school"
+          onChange={handleSchoolChange}
+          style={{
+            width: '100%',
+            padding: '0.75rem',
+            borderRadius: '8px',
+            border: '1px solid #ccc',
+            fontSize: '1rem',
+          }}
+        >
+          <option value="">-- Select a school --</option>
+          <option value="colby">Colby</option>
+          <option value="bowdoin">Bowdoin</option>
+          <option value="umass">UMass</option>
+          <option value="middlebury">Middlebury</option>
+          <option value="stanford">Stanford</option>
+          <option value="yale">Yale</option>
+          <option value="nyu">NYU</option>
+          <option value="uncchapelhill">UNC Chapel Hill</option>
+        </select>
+      </section>
 
-        <section className="bg-white py-16">
-          <div className="max-w-6xl mx-auto px-6">
-            <h2 className="text-3xl font-bold text-center mb-12 text-gray-900">
-              What students are asking
-            </h2>
-            <div className="grid gap-8 md:grid-cols-3">
-              <div className="p-6 bg-[#F9FAFB] rounded-lg shadow">
-                <div className="flex items-center justify-between mb-4">
-                  <span className="text-sm font-semibold text-gray-600">Colby '26</span>
-                  <span className="text-sm text-gray-500">▲ 24</span>
-                </div>
-                <p className="font-medium text-gray-800 mb-2">
-                  “How easy is it to switch majors at Colby?”
-                </p>
-                <p className="text-sm text-gray-600">
-                  “Super straightforward — I filled out a form online and met with my advisor. Took less than a week.”
-                </p>
-              </div>
+      {/* Testimonial */}
+      <section
+        style={{
+          padding: '3rem 1.5rem',
+          backgroundColor: '#fff',
+          textAlign: 'center',
+          flex: '1',
+        }}
+      >
+        <h3 style={{ fontSize: '1.5rem', fontWeight: 700, color: '#111' }}>
+          What Students Are Saying
+        </h3>
+        <blockquote
+          style={{
+            marginTop: '1rem',
+            fontStyle: 'italic',
+            color: '#555',
+            maxWidth: '640px',
+            marginLeft: 'auto',
+            marginRight: 'auto',
+          }}
+        >
+          "InsideCampus gave me the real tea on dorm life before I even packed my bags!"
+        </blockquote>
+      </section>
 
-              <div className="p-6 bg-[#F9FAFB] rounded-lg shadow">
-                <div className="flex items-center justify-between mb-4">
-                  <span className="text-sm font-semibold text-gray-600">Bowdoin '25</span>
-                  <span className="text-sm text-gray-500">▲ 18</span>
-                </div>
-                <p className="font-medium text-gray-800 mb-2">
-                  “Is the dining hall really that good?”
-                </p>
-                <p className="text-sm text-gray-600">
-                  “Yes — the mac & cheese bar on Fridays is legendary. You’ll miss it on breaks.”
-                </p>
-              </div>
-
-              <div className="p-6 bg-[#F9FAFB] rounded-lg shadow">
-                <div className="flex items-center justify-between mb-4">
-                  <span className="text-sm font-semibold text-gray-600">UMass '24</span>
-                  <span className="text-sm text-gray-500">▲ 32</span>
-                </div>
-                <p className="font-medium text-gray-800 mb-2">
-                  “What’s freshman housing like at UMass?”
-                </p>
-                <p className="text-sm text-gray-600">
-                  “Most first-years end up in Southwest. It’s social but loud — bring earplugs!”
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section className="py-16">
-          <div className="max-w-4xl mx-auto px-6 text-center">
-            <p className="text-[#3A86FF] font-semibold uppercase tracking-wide mb-4">
-              Trusted by over 1,000 admitted students
-            </p>
-            <blockquote className="text-xl md:text-2xl font-medium text-gray-800 italic mb-4">
-              “InsideCampus gave me the confidence to choose Bowdoin. The student answers felt like chatting with future classmates.”
-            </blockquote>
-            <span className="block text-gray-600">— Bowdoin '25</span>
-          </div>
-        </section>
-
-        <section className="py-12" style={{ backgroundColor: '#FF8C66' }}>
-          <div className="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
-            <h3 className="text-2xl font-bold text-white text-center md:text-left">
-              Ready to dive deeper?
-            </h3>
-            <div className="flex gap-4">
-              <a
-                href="/colby"
-                className="px-5 py-3 bg-white text-[#3A86FF] font-semibold rounded-md"
-              >
-                Ask a Question
-              </a>
-              <a
-                href="/verify"
-                className="px-5 py-3 bg-white text-[#3A86FF] font-semibold rounded-md"
-              >
-                Verify to Answer
-              </a>
-            </div>
-          </div>
-        </section>
-      </main>
-
-      <footer className="bg-[#F9FAFB] border-t border-gray-200 py-8">
-        <div className="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="flex gap-6">
-            <a href="/about" className="text-gray-600 hover:text-gray-800">
-              About
-            </a>
-            <a href="/privacy" className="text-gray-600 hover:text-gray-800">
-              Privacy
-            </a>
-            <a href="/contact" className="text-gray-600 hover:text-gray-800">
-              Contact
-            </a>
-          </div>
-          <p className="text-gray-500 text-sm">© 2025 InsideCampus</p>
-        </div>
+      {/* Footer */}
+      <footer style={{ padding: '2rem 1.5rem', textAlign: 'center', fontSize: '0.875rem', color: '#555' }}>
+        <Link href="/about" passHref>
+          <a>About</a>
+        </Link>{' '}
+        |{' '}
+        <Link href="/privacy" passHref>
+          <a>Privacy</a>
+        </Link>{' '}
+        |{' '}
+        <Link href="/contact" passHref>
+          <a>Contact</a>
+        </Link>
       </footer>
     </div>
   );
