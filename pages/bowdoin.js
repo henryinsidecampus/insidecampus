@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import supabase from '../supabase';
-
+import Head from 'next/head';
 export default function BowdoinPage() {
   const [questions, setQuestions] = useState([]);
 
@@ -54,6 +54,10 @@ export default function BowdoinPage() {
 
   return (
     <div style={{ padding: '2rem', fontFamily: 'Inter, sans-serif' }}>
+<Head>
+    <title>Bowdoin Q&A Hub | InsideCampus</title>
+    <meta name="description" content="Real, anonymous questions answered by verified Bowdoin students. Join the InsideCampus Q&A hub for genuine insight." />
+  </Head>
       <h1 style={{ fontSize: '2rem', fontWeight: 'bold' }}>Bowdoin Q&A Hub</h1>
       <p style={{ marginBottom: '1.5rem' }}>
         Real, anonymous questions answered by verified Bowdoin students.
