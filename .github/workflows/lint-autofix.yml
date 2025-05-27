@@ -12,7 +12,7 @@ jobs:
         with:
           node-version: 18
       - run: npm install eslint eslint-plugin-unused-imports --save-dev
-      - run: npx eslint pages components styles --fix
+      - run: npx eslint pages components --fix
       - run: git config --global user.name "autofix-bot"
       - run: git config --global user.email "autofix@insidecampus.com"
       - run: git commit -am "Auto-fix ESLint issues" || echo "No changes to commit"
