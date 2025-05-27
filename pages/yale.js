@@ -1,65 +1,87 @@
-import { useEffect, useState } from 'react'
-import { supabase } from '../supabase'
+import { useEffect, useState } from 'react';
+import supabase from '../supabase';
 
 export default function YalePage() {
-  const [questions, setQuestions] = useState([])
+  const [questions, setQuestions] = useState([]);
 
   useEffect(() => {
     async function fetchQuestions() {
-      const { data, error } = await supabase
+      let { data, error } = await supabase
         .from('questions')
         .select('*')
         .eq('school', 'yale')
-        .order('created_at', { ascending: false })
+        .order('created_at', { ascending: false });
 
-      if (!error) setQuestions(data)
+      if (error) {
+        console.error(error);
+        return;
+      }
+
+      if (data.length === 0) {
+        const { error: insertError } = await supabase.from('questions').insert([
+          {
+            school: 'yale',
+            question_text: "What’s student life like at yale?",
+            answer_text: "It’s a mix of academics and social life.",
+            class_year: '2025',
+            upvotes: 8,
+          },
+          {
+            school: 'yale',
+            question_text: 'Is housing guaranteed all 4 years?',
+            answer_text: 'Yes, for most undergrads.',
+            class_year: '2026',
+            upvotes: 6,
+          },
+        ]);
+
+        if (insertError) {
+          console.error(insertError);
+        } else {
+          const { data: newData } = await supabase
+            .from('questions')
+            .select('*')
+            .eq('school', 'yale')
+            .order('created_at', { ascending: false });
+          data = newData;
+        }
+      }
+
+      setQuestions(data);
     }
-    fetchQuestions()
-  }, [])
+    fetchQuestions();
+  }, []);
 
   return (
-    <div style={{ padding: '2rem', fontFamily: 'Inter, sans-serif', maxWidth: '800px', margin: '0 auto' }}>
-      <h1 style={{ fontSize: '2rem', fontWeight: 'bold' }}>Yale University Q&A Hub</h1>
-      <p style={{ color: '#666', marginBottom: '2rem' }}>
+    <div style={{ padding: '2rem', fontFamily: 'Inter, sans-serif' }}>
+      <h1 style={{ fontSize: '2rem', fontWeight: 'bold' }}>Yale Q&A Hub</h1>
+      <p style={{ marginBottom: '1.5rem' }}>
         Real, anonymous questions answered by verified Yale students.
       </p>
-
       <div>
-        <h3>Recent Questions</h3>
-        {questions && questions.length > 0 ? (
-          questions.map((q) => (
-            <div key={q.id} style={{ marginBottom: '1.5rem', paddingBottom: '1rem', borderBottom: '1px solid #e5e7eb' }}>
-              <p style={{ fontWeight: '600' }}>{q.question_text}</p>
-              <p style={{ marginTop: '0.5rem', color: '#374151' }}>{q.answer_text}</p>
-              <p style={{ marginTop: '0.5rem', fontSize: '0.875rem', color: '#6b7280' }}>
-                {q.class_year} &middot; ▲ {q.upvotes}
-              </p>
-            </div>
-          ))
-        ) : (
-          <p>No questions yet. Be the first to ask!</p>
-        )}
-      </div>
-
-      <div style={{ marginTop: '2rem' }}>
-        <input
-          type="text"
-          placeholder="Ask a question..."
-          style={{ width: '100%', padding: '0.75rem', border: '1px solid #d1d5db', borderRadius: '0.375rem' }}
-        />
-        <button
-          style={{
-            marginTop: '0.75rem',
-            backgroundColor: '#3A86FF',
-            color: '#fff',
-            padding: '0.75rem 1.5rem',
-            borderRadius: '0.375rem',
-            fontWeight: '600',
-          }}
-        >
-          Submit
-        </button>
+        {questions.map((q) => (
+          <div
+            key={q.id}
+            style={{
+              padding: '1rem',
+              marginBottom: '1rem',
+              border: '1px solid #ccc',
+            }}
+          >
+            <p>
+              <strong>Q:</strong> {q.question_text}
+            </p>
+            <p>
+              <strong>A:</strong> {q.answer_text}
+            </p>
+            <p>
+              <em>
+                Class of {q.class_year} • {q.upvotes} upvotes
+              </em>
+            </p>
+          </div>
+        ))}
       </div>
     </div>
-  )
+  );
 }
