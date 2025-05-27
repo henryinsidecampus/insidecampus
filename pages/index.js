@@ -22,7 +22,7 @@ export default function HomePage() {
               <option value="stanford">Stanford</option>
               <option value="yale">Yale</option>
               <option value="nyu">NYU</option>
-              <option value="uncchapelhill">UNC</option>
+              <option value="UNC Chapel Hill">UNC</option>
             </select>    </div>
       </header>
 
