@@ -1,163 +1,61 @@
-import React from 'react';
-import Link from 'next
-  import Head from 'next/head';/link';
+import Head from 'next/head';
+import Link from 'next/link';
 
-export default function HomePage() {
-  const handleSchoolChange = (e) => {
-    const school = e.target.value;
-    if (school) {
-      window.location.href = `/${school}`;
-    }
-  };
-
+export default function Home() {
   return (
-    <div
-      style={{
-        fontFamily: 'Inter, sans-serif',
-        backgroundColor: '#F9FAFB',
-        minHeight: '100vh',
-        display: 'flex',
-        flexDirection: 'column',
-      }}
-    >
-  
+    <>
       <Head>
-        <title>InsideCampus – Home</title>
-        <meta name="description" content="Student-powered Q&A hub for real campus insights." />
+        <title>InsideCampus | Ask Real Students Anything</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="description" content="Ask real questions and get honest answers from verified students at top colleges. No fluff, just real talk." />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css" />
+        <script async defer data-domain="insidecampus.com" src="https://plausible.io/js/script.js"></script>
       </Head>
-{/* Sticky Header */}
-      <header
-        style={{
-          position: 'sticky',
-          top: 0,
-          backgroundColor: '#F9FAFB',
-          zIndex: 1000,
-          padding: '1rem 1.5rem',
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          boxShadow: '0 1px 2px rgba(0,0,0,0.05)',
-        }}
-      >
-        <h1 style={{ color: '#3A86FF', fontSize: '1.25rem', fontWeight: 700 }}>InsideCampus</h1>
-        <Link href="#school-selector" passHref>
-          <a
-            style={{
-              backgroundColor: '#FF8C66',
-              color: '#fff',
-              padding: '0.5rem 1rem',
-              borderRadius: '8px',
-              fontWeight: 600,
-              textDecoration: 'none',
-            }}
-          >
-            Explore Schools
-          </a>
-        </Link>
-      </header>
 
-      {/* Hero */}
-      <section style={{ padding: '3rem 1.5rem', textAlign: 'center' }}>
-        <h2 style={{ fontSize: '2.25rem', fontWeight: 800, color: '#111' }}>
-          Real questions. Honest answers. No BS.
-        </h2>
-        <p style={{ marginTop: '1rem', fontSize: '1.125rem', color: '#444' }}>
-          InsideCampus is the student-powered Q&A hub where you get the unfiltered scoop before you step on campus.
-        </p>
-        <Link href="#school-selector" passHref>
-          <a
-            style={{
-              marginTop: '2rem',
-              display: 'inline-block',
-              backgroundColor: '#3A86FF',
-              color: '#fff',
-              padding: '0.75rem 1.5rem',
-              borderRadius: '8px',
-              fontWeight: 600,
-              textDecoration: 'none',
-            }}
-          >
-            Start Exploring
-          </a>
-        </Link>
-      </section>
+      <nav className="container-fluid">
+        <ul><li><strong>InsideCampus</strong></li></ul>
+        <ul>
+          <li><Link href="/">Home</Link></li>
+          <li><Link href="#schools">Browse Schools</Link></li>
+          <li><Link href="/login" role="button">Log in</Link></li>
+        </ul>
+      </nav>
 
-      {/* School Selector */}
-      <section
-        id="school-selector"
-        style={{
-          padding: '2rem 1.5rem',
-          maxWidth: '480px',
-          margin: '0 auto',
-          width: '100%',
-        }}
-      >
-        <label htmlFor="school" style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 600 }}>
-          Choose your school:
-        </label>
-        <select
-          id="school"
-          onChange={handleSchoolChange}
-          style={{
-            width: '100%',
-            padding: '0.75rem',
-            borderRadius: '8px',
-            border: '1px solid #ccc',
-            fontSize: '1rem',
-          }}
-        >
-          <option value="">-- Select a school --</option>
-          <option value="colby">Colby</option>
-          <option value="bowdoin">Bowdoin</option>
-          <option value="umass">UMass</option>
-          <option value="middlebury">Middlebury</option>
-          <option value="stanford">Stanford</option>
-          <option value="yale">Yale</option>
-          <option value="nyu">NYU</option>
-          <option value="uncchapelhill">UNC Chapel Hill</option>
-        </select>
-      </section>
+      <main className="container">
+        <header style={{ textAlign: 'center', padding: '4rem 1rem 2rem' }}>
+          <h1>Ask Real Students Anything</h1>
+          <p>Get real answers from verified students at top colleges. Anonymously submit questions and explore what campus life is really like.</p>
+          <p><a href="#schools" role="button">Browse Schools</a></p>
+        </header>
 
-      {/* Testimonial */}
-      <section
-        style={{
-          padding: '3rem 1.5rem',
-          backgroundColor: '#fff',
-          textAlign: 'center',
-          flex: '1',
-        }}
-      >
-        <h3 style={{ fontSize: '1.5rem', fontWeight: 700, color: '#111' }}>
-          What Students Are Saying
-        </h3>
-        <blockquote
-          style={{
-            marginTop: '1rem',
-            fontStyle: 'italic',
-            color: '#555',
-            maxWidth: '640px',
-            marginLeft: 'auto',
-            marginRight: 'auto',
-          }}
-        >
-          "InsideCampus gave me the real tea on dorm life before I even packed my bags!"
-        </blockquote>
-      </section>
+        <section id="schools">
+          <h2 style={{ textAlign: 'center' }}>Explore Schools</h2>
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))',
+            gap: '2rem',
+            justifyItems: 'center',
+            padding: '2rem 0'
+          }}>
+            {["colby", "bowdoin", "umass", "middlebury", "stanford", "yale", "nyu"].map((school) => (
+              <figure key={school} style={{ textAlign: 'center' }}>
+                <img
+                  src={`https://logo.clearbit.com/${school}.edu`}
+                  alt={`${school} logo`}
+                  style={{ width: '60px', height: '60px', borderRadius: '8px', objectFit: 'contain' }}
+                />
+                <figcaption>
+                  <Link href={`/${school}`}>{school.charAt(0).toUpperCase() + school.slice(1)}</Link>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        </section>
+      </main>
 
-      {/* Footer */}
-      <footer style={{ padding: '2rem 1.5rem', textAlign: 'center', fontSize: '0.875rem', color: '#555' }}>
-        <Link href="/about" passHref>
-          <a>About</a>
-        </Link>{' '}
-        |{' '}
-        <Link href="/privacy" passHref>
-          <a>Privacy</a>
-        </Link>{' '}
-        |{' '}
-        <Link href="/contact" passHref>
-          <a>Contact</a>
-        </Link>
+      <footer className="container">
+        <small><a href="#">About</a> • <a href="#">Privacy</a></small>
       </footer>
-    </div>
+    </>
   );
 }
