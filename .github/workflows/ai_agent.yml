@@ -27,5 +27,6 @@ jobs:
       env:
         FROM_EMAIL: ${{ secrets.FROM_EMAIL }}
         EMAIL_APP_PASSWORD: ${{ secrets.EMAIL_APP_PASSWORD }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
       run: |
         python ai_agent_generator/main.py
