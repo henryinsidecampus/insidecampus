@@ -7,9 +7,13 @@
     "start": "next start"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.38.3",
     "next": "14.0.3",
     "react": "18.2.0",
-   "react-dom": "18.2.0",
-"@supabase/supabase-js": "^2.38.3"
+    "react-dom": "18.2.0"
+  },
+  "devDependencies": {
+    "eslint": "^9.27.0",
+    "eslint-plugin-unused-imports": "^4.1.4"
   }
 }
