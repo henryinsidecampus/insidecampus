@@ -1,7 +1,8 @@
 name: Lint Autofix
 
 on: [workflow_dispatch]
-
+permissions:
+  contents: write
 jobs:
   lint:
     runs-on: ubuntu-latest
