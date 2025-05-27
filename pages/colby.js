@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import supabase from '../supabase';
+import Head from 'next/head';
 
 export default function ColbyPage() {
   const [questions, setQuestions] = useState([]);
@@ -54,7 +55,12 @@ export default function ColbyPage() {
 
   return (
     <div style={{ padding: '2rem', fontFamily: 'Inter, sans-serif' }}>
-      <h1 style={{ fontSize: '2rem', fontWeight: 'bold' }}>Colby Q&A Hub</h1>
+
+        <Head>
+        <title>InsideCampus – Colby Q&A</title>
+        <meta name="description" content="Real, anonymous questions answered by verified Colby students." />
+      </Head>
+<h1 style={{ fontSize: '2rem', fontWeight: 'bold' }}>Colby Q&A Hub</h1>
       <p style={{ marginBottom: '1.5rem' }}>
         Real, anonymous questions answered by verified Colby students.
       </p>
