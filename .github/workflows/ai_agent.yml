@@ -1,0 +1,31 @@
+name: Daily AI Agent Generator
+
+on:
+  schedule:
+    - cron: '0 13 * * *'  # 8:00 AM EST = 13:00 UTC
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Run AI Agent Generator
+      env:
+        FROM_EMAIL: ${{ secrets.FROM_EMAIL }}
+        EMAIL_APP_PASSWORD: ${{ secrets.EMAIL_APP_PASSWORD }}
+      run: |
+        python ai_agent_generator/main.py
