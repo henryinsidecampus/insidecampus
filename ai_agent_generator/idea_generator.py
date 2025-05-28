@@ -12,7 +12,7 @@ from openai import OpenAI
 client = OpenAI()
 
 
-def genedef generate_agent_ideas(news_summary: str) -> List[Dict]:
+def  generate_agent_ideas(news_summary: str) -> List[Dict]:
     """
     Generates 10 new AI agent ideas tailored for Henry.
     """
