@@ -20,12 +20,12 @@ jobs:
 
     - name: Install dependencies
       run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
-    - name: Run AI Agent Generator
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+    - n ame: Run AI Agent Generator
       env:
-            FROM_EMAIL: ${{ secrets.FROM_EMAIL }}
-          EMAIL_APP_PASSWORD: ${{ secrets.EMAIL_APP_PASSWORD }}
-            OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-              run: |
-              python ai_agent_generator/main.py
+                FROM_EMAIL: ${{ secrets.FROM_EMAIL }}
+      EMAIL_APP_PASSWORD: ${{ secrets.EMAIL_APP_PASSWORD }}
+          run: |      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+           
+                    python ai_agent_generator/main.py
