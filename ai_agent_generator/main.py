@@ -68,8 +68,14 @@ def schedule():
         logging.info("Scheduler stopped.")
 
 
+import os
+import sys
+
 if __name__ == "__main__":
-    if os.getenv("CI"):
+    # GitHub Actions sets GITHUB_ACTIONS=true, most CI tools set CI=true
+    if os.getenv("CI") or os.getenv("GITHUB_ACTIONS"):
         run_daily()
+        sys.exit(0)
     else:
-    schedule()
+        schedule()
+
