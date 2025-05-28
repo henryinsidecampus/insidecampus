@@ -67,14 +67,12 @@ def schedule():
     except (KeyboardInterrupt, SystemExit):
         logging.info("Scheduler stopped.")
 
-
-import os
-import sys
-
 if __name__ == "__main__":
-    # GitHub Actions sets GITHUB_ACTIONS=true, most CI tools set CI=true
+    logging.info("✅ run_daily triggered")
+
     if os.getenv("CI") or os.getenv("GITHUB_ACTIONS"):
         run_daily()
+        logging.info("✅ run_daily completed in CI")
         sys.exit(0)
     else:
         schedule()
