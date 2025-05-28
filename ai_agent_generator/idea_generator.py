@@ -49,10 +49,10 @@ def generate_agent_ideas(news_summary: str) -> List[Dict]:
                 )
             ideas = json.loads(reform_response.choices[0].message.content)
     
-        today = datetime.now().strftime("%Y-%m-%d")
-        for idea in ideas:
-            idea["Date"] = today
-    return ideas
+            today = datetime.now().strftime("%Y-%m-%d")
+            for idea in ideas:
+                idea["Date"] = today
+        return ideas
             except Exception as e:
     logging.error(f"OpenAI generation failed: {e}")
 ideas = []
