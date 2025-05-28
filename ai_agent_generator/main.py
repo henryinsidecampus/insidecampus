@@ -11,6 +11,7 @@ Runs every day at 8:00 AM EST and performs:
 import logging
 import traceback
 import os
+import sys
 from datetime import datetime
 
 import pytz
@@ -71,4 +72,4 @@ if __name__ == "__main__":
     if os.getenv("CI"):
         run_daily()
     else:
-        schedule()ule()
+    schedule()
