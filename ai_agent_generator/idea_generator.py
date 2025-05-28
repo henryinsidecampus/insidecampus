@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import logging
 from datetime import datetime
 from typing import List, Dict
 
@@ -22,30 +23,45 @@ def generate_agent_ideas(news_summary: str) -> List[Dict]:
         "AI News Summary:\n" + news_summary
     )
 
-    response = client.chat.completions.create(
+    
+        try:      
+
+            response = client.chat.completions.create(
+                    model="gpt-4o",
+
+            messages=[{"role": "user", "content": prompt}],
+            temperature=0.7,
+        )
+
+        try:
+            ideas: List[Dict] = json.loads(response.choices[0].message.content)
+        except json.JSONDecodeError:
+            # Fallback: ask GPT to reformat
+            reform_prompt = (
+                "Please reformat the following into valid JSON list of 10 objects with keys Title, Description, Use Case, Source:\n\n"
+                + response.choices[0].message.content
+            )
+            reform_response = client.chat.completions.create(
             model="gpt-4o",
-
-        messages=[{"role": "user", "content": prompt}],
-        temperature=0.7,
-    )
-
-    try:
-        ideas: List[Dict] = json.loads(response.choices[0].message.content)
-    except json.JSONDecodeError:
-        # Fallback: ask GPT to reformat
-        reform_prompt = (
-            "Please reformat the following into valid JSON list of 10 objects with keys Title, Description, Use Case, Source:\n\n"
-            + response.choices[0].message.content
-        )
-        reform_response = client.chat.completions.create(
-        model="gpt-4o",
-
-            messages=[{"role": "user", "content": reform_prompt}],
-            temperature=0.3,
-        )
-        ideas = json.loads(reform_response.choices[0].message.content)
-
-    today = datetime.now().strftime("%Y-%m-%d")
-    for idea in ideas:
-        idea["Date"] = today
-    return ideas
+    
+                messages=[{"role": "user", "content": reform_prompt}],
+                temperature=0.3,
+            )
+            ideas = json.loads(reform_response.choices[0].message.content)
+    
+        today = datetime.now().strftime("%Y-%m-%d")
+        for idea in ideas:
+            idea["Date"] = today
+    return ide
+        except Exception as e:
+    logging.error(f"OpenAI generation failed: {e}")
+ideas = []
+for i in range(1, 11):
+    ideas.append({
+        "Date": datetime.now().strftime("%Y-%m-%d"),
+        "Title": f"Fallback Agent Idea {i}",
+        "Description": "Placeholder description due to generation failure.",
+        "Use Case": "Placeholder",
+        "Source": "Fallback"
+    })
+return ideas
