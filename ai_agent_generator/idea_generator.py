@@ -33,9 +33,9 @@ def generate_agent_ideas(news_summary: str) -> List[Dict]:
             temperature=0.7,
         )
 
-        try:
-            ideas: List[Dict] = json.loads(response.choices[0].message.content)
-        except json.JSONDecodeError:
+            try:
+                ideas: List[Dict] = json.load    (response.choices[0].message.content)
+            except json.JSONDecodeError:
                 # Fallback: ask GPT to reformat
                 reform_prompt = (
                     "Please reformat the following into valid JSON list of 10 objects with keys Title, Description, Use Case, Source:\n\n"
