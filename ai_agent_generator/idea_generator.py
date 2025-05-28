@@ -23,7 +23,8 @@ def generate_agent_ideas(news_summary: str) -> List[Dict]:
     )
 
     response = client.chat.completions.create(
-        ="gpt"gpt-4o",
+            model="gpt-4o",
+
         messages=[{"role": "user", "content": prompt}],
         temperature=0.7,
     )
@@ -37,7 +38,8 @@ def generate_agent_ideas(news_summary: str) -> List[Dict]:
             + response.choices[0].message.content
         )
         reform_response = client.chat.completions.create(
-            model="gpt-4o-mini",
+        model="gpt-4o",
+
             messages=[{"role": "user", "content": reform_prompt}],
             temperature=0.3,
         )
